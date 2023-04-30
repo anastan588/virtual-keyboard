@@ -1,0 +1,216 @@
+@font-face {
+  font-family: "Georgia";
+  // адрес шрифта и тип
+  src: url("../fonts/Gelasio-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+/*Normalize*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/*--------------------*/
+
+.bigred {
+  font-size: 20px;
+  color: red;
+}
+
+/*Normalize*/
+
+/*fonts*/
+$font_georgia: "Georgia", sans-serif;
+/*fonts*/
+
+/*container*/
+$container: 1200px;
+/*container*/
+$color: #ffffff;
+$color_for_border_keys: rgba(255, 255, 255, 0.7);
+$main-color: #000000;
+$color_hover: #008080;
+$color_border_active: tomato;
+$color_back: rgba(0, 0, 0, 0.8);
+$color_back2: rgba(0, 0, 0, 0.4);
+/*variables*/
+
+/*common css*/
+body {
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  background-image: url(../images/2023-03-14-windows-11-1-58245.jpeg);
+  //   background-color: $main-color;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  //   overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-family: $font_georgia;
+  max-width: $container;
+  margin: 30px auto;
+}
+
+.title {
+  font-size: 300%;
+  width: 100%;
+  font-weight: bold;
+  color: $color;
+  text-align: center;
+}
+.textarea {
+  padding: 20px;
+  border: 2px solid $color;
+  // width: 100%;
+  font-size: 200%;
+  background-color: $color_back2;
+  color: $color;
+  box-sizing: border-box;
+}
+.keyBoard {
+  font-size: 200%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 5px;
+  justify-content: center;
+}
+.keyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  min-height: 68px;
+  // min-width: 78px;
+  box-sizing: border-box;
+  color: $color;
+  font-size: 100%;
+  border: 4px inset $color_for_border_keys;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: $color_back;
+  vertical-align: middle;
+  flex-grow: 1;
+  // margin-right: 3px;
+  &:hover {
+    border: 4px outset;
+    background-color: $color_hover;
+    border-color: $color_hover;
+    outline: none;
+  }
+  &:active {
+    border: 4px $color_border_active outset;
+    color: $color_border_active;
+    background-color: $color_hover;
+  }
+}
+.ps {
+  padding: 15px;
+  line-height: 150%;
+  width: 100%;
+  font-size: 200%;
+  background-color: $color_back2;
+  color: $color;
+  box-sizing: border-box;
+}
+.active {
+  border: 4px $color_border_active outset;
+  color: $color_border_active;
+  background-color: $color_hover;
+}

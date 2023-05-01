@@ -143,7 +143,7 @@ class KeyBoardBody {
     this.PS = document.createElement('div');
     this.PS.classList.add('ps');
     this.PS.textContent = `Клавиатура создана на Windows OC,\n
-     переключение языка осуществляется сочетанием клавиш "Alt+Shift"`;
+     переключение языка осуществляется сочетанием клавиш "Alt+Shift" или "Ctrl+Shift"`;
     this.wrapper.append(this.title);
     this.wrapper.append(this.textarea);
     this.wrapper.append(this.keyBoard);
@@ -209,7 +209,11 @@ class KeyBoardBody {
     for (let button = 0; button < buttonsCollection.length; button += 1) {
       // console.log(button);
       if (
-        (event.key === buttonsCollection[button].textContent
+        ((event.key === buttonsCollection[button].textContent
+          || (event.key === 'ArrowUp' && buttonsCollection[button].textContent === '▲')
+          || (event.key === 'ArrowLeft' && buttonsCollection[button].textContent === '◄')
+          || (event.key === 'ArrowRight' && buttonsCollection[button].textContent === '►')
+          || (event.key === 'ArrowDown' && buttonsCollection[button].textContent === '▼'))
           || (event.type === 'click'
             && currentButton.textContent
               === buttonsCollection[button].textContent))
@@ -244,7 +248,7 @@ class KeyBoardBody {
           localStorage.setItem('CapsLock', 'true');
           for (
             let buttonForLanguage = 0;
-            button < buttonsCollection.length;
+            buttonForLanguage < buttonsCollection.length;
             buttonForLanguage += 1
           ) {
             if (
@@ -265,7 +269,7 @@ class KeyBoardBody {
           localStorage.removeItem('CapsLock');
           for (
             let buttonForLanguage = 0;
-            button < buttonsCollection.length;
+            buttonForLanguage < buttonsCollection.length;
             buttonForLanguage += 1
           ) {
             if (
@@ -342,7 +346,7 @@ class KeyBoardBody {
         countofShift += 1;
         // console.log(countofShift);
         if (
-          localStorage.getItem('Alt')
+          (localStorage.getItem('Alt') || localStorage.getItem('Ctrl'))
           && !buttonsCollection[button].classList.contains('active')
         ) {
           localStorage.setItem('Shift', 'true');
@@ -388,9 +392,10 @@ class KeyBoardBody {
           setTimeout(() => {
             localStorage.removeItem('Shift');
             localStorage.removeItem('Alt');
+            localStorage.removeItem('Ctrl');
             for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
               if (
-                buttonsCollection[secondButton].textContent === 'Alt'
+                (buttonsCollection[secondButton].textContent === 'Alt' || buttonsCollection[secondButton].textContent === 'Ctrl')
                  || buttonsCollection[secondButton].textContent === 'Shift'
               ) {
                 // console.log(secondButton);
@@ -399,7 +404,7 @@ class KeyBoardBody {
             }
           }, 500);
         } else if (
-          !localStorage.getItem('Alt')
+          (!localStorage.getItem('Alt') || !localStorage.getItem('Ctrl'))
           && !buttonsCollection[button].classList.contains('active')
         ) {
           localStorage.setItem('Shift', 'true');
@@ -430,7 +435,7 @@ class KeyBoardBody {
             }
           }
         } else if (
-          !localStorage.getItem('Alt')
+          (!localStorage.getItem('Alt') || !localStorage.getItem('Ctrl'))
           && buttonsCollection[button].classList.contains('active')
         ) {
           localStorage.removeItem('Shift');
@@ -516,6 +521,43 @@ class KeyBoardBody {
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');
         }, 500);
+      } else if (
+        (event.key === 'Control'
+          || (event.type === 'click'
+            && currentButton.textContent
+              === buttonsCollection[button].textContent))
+        && buttonsCollection[button].textContent === 'Ctrl') {
+        // console.log(localStorage.getItem('Ctrl'));
+        if (
+          !localStorage.getItem('Ctrl')
+            && !buttonsCollection[button].classList.contains('active')
+        ) {
+          localStorage.setItem('Ctrl', 'true');
+          // console.log(localStorage.getItem('Ctrl'));
+          for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
+            // console.log(buttonsCollection[secondButton].textContent);
+            if (
+              buttonsCollection[secondButton].textContent === buttonsCollection[button].textContent
+            ) {
+              buttonsCollection[secondButton].classList.add('active');
+            }
+          }
+          return;
+        }
+        if (
+          localStorage.getItem('Ctrl')
+          && buttonsCollection[button].classList.contains('active')
+        ) {
+          for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
+            if (
+              buttonsCollection[secondButton].textContent === buttonsCollection[button].textContent
+            ) {
+              buttonsCollection[secondButton].classList.remove('active');
+            }
+          }
+          localStorage.removeItem('Ctrl');
+          return;
+        }
       }
     }
   }

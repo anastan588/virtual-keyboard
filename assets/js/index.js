@@ -486,7 +486,7 @@ class KeyBoardBody {
           buttonsCollection[button].classList.remove('active');
         }, 500);
       } else if (
-        (event.key === buttonsCollection[button].textContent
+        (event.key === 'Delete'
           || (event.type === 'click'
             && currentButton.textContent
               === buttonsCollection[button].textContent))

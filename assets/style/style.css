@@ -175,13 +175,14 @@ body {
 .keyButton:hover {
   border: 4px outset;
   background-color: #008080;
-  border-color: #008080;
+  border-color: tomato;
   outline: none;
 }
 .keyButton:active {
   border: 4px tomato outset;
   color: tomato;
   background-color: #008080;
+  border-radius: 50%;
 }
 
 .ps {

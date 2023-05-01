@@ -14,8 +14,6 @@
 *,
 *:before,
 *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -38,7 +36,6 @@ aside {
 
 html,
 body {
-  height: 100%;
   width: 100%;
   font-size: 100%;
   line-height: 1;
@@ -151,7 +148,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   row-gap: 10px;
-  column-gap: 5px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
   justify-content: center;
 }
 

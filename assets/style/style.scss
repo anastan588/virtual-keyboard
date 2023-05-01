@@ -191,13 +191,14 @@ body {
   &:hover {
     border: 4px outset;
     background-color: $color_hover;
-    border-color: $color_hover;
+    border-color: $color_border_active;
     outline: none;
   }
   &:active {
     border: 4px $color_border_active outset;
     color: $color_border_active;
     background-color: $color_hover;
+    border-radius: 50%;
   }
 }
 .ps {

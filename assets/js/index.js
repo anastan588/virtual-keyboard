@@ -149,6 +149,7 @@ class KeyBoardBody {
     this.wrapper.append(this.keyBoard);
     this.wrapper.append(this.PS);
     document.body.prepend(this.wrapper);
+    this.textarea.focus();
   }
 
   receiveKeyBoard() {
@@ -198,6 +199,7 @@ class KeyBoardBody {
   showKey(event) {
     // console.log(event.key);
     // console.log(event.type);
+    event.preventDefault();
     const buttonsCollection = document.querySelectorAll('.button');
     const currentButton = event.target.closest('.button');
     if (!currentButton && event.type === 'click') {
@@ -516,7 +518,7 @@ class KeyBoardBody {
               === buttonsCollection[button].textContent))
         && buttonsCollection[button].textContent === 'Tab'
       ) {
-        this.textarea.textContent += '\t';
+        this.textarea.textContent += '        ';
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');

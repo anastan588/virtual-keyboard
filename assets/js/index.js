@@ -562,6 +562,7 @@ class KeyBoardBody {
         }
       }
     }
+    this.textarea.selectionStart = this.textarea.value.length;
   }
 
   textareaFocus() {

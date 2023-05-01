@@ -4,7 +4,6 @@
   font-style: normal;
   font-weight: normal;
 }
-
 /*Normalize*/
 * {
   padding: 0;
@@ -15,6 +14,7 @@
 *,
 *:before,
 *:after {
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
@@ -110,29 +110,18 @@ h6 {
 /*variables*/
 /*common css*/
 body {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   scroll-behavior: smooth;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background-image: url(../images/2023-03-14-windows-11-1-58245.jpeg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   gap: 30px;
   font-family: "Georgia", sans-serif;
   max-width: 1200px;
@@ -153,62 +142,42 @@ body {
   font-size: 200%;
   background-color: rgba(0, 0, 0, 0.4);
   color: #ffffff;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .keyBoard {
   font-size: 200%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  box-sizing: border-box;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   row-gap: 10px;
-  -webkit-column-gap: 5px;
-          column-gap: 5px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  column-gap: 5px;
+  justify-content: center;
 }
 
 .keyButton {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 15px 20px;
   min-height: 68px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   color: #ffffff;
   font-size: 100%;
   border: 4px inset rgba(255, 255, 255, 0.7);
   border-radius: 5px;
   cursor: pointer;
-  -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
   background-color: rgba(0, 0, 0, 0.8);
   vertical-align: middle;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  flex-grow: 1;
 }
-
 .keyButton:hover {
   border: 4px outset;
   background-color: #008080;
   border-color: #008080;
   outline: none;
 }
-
 .keyButton:active {
   border: 4px tomato outset;
   color: tomato;
@@ -222,13 +191,11 @@ body {
   font-size: 200%;
   background-color: rgba(0, 0, 0, 0.4);
   color: #ffffff;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .active {
   border: 4px tomato outset;
   color: tomato;
   background-color: #008080;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

@@ -147,7 +147,7 @@ class KeyBoardBody {
     this.PS = document.createElement('div');
     this.PS.classList.add('ps');
     this.PS.textContent = `Клавиатура создана на Windows OC,\n
-     переключение языка осуществляется сочетанием клавиш "Alt+Shift" или "Ctrl+Shift"`;
+     переключение языка осуществляется сочетанием клавиш "Alt+Shift" или "Ctrl+Shift" c учетом правильно выбранного языка на компьютере`;
     this.wrapper.append(this.title);
     this.wrapper.append(this.textarea);
     this.wrapper.append(this.keyBoard);

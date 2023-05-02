@@ -112,9 +112,12 @@ body {
   flex-direction: column;
   scroll-behavior: smooth;
   box-sizing: border-box;
+}
+
+.main-container {
   background-image: url(../images/2023-03-14-windows-11-1-58245.jpeg);
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 
 .container {
@@ -188,7 +191,7 @@ body {
   padding: 15px;
   line-height: 150%;
   width: 100%;
-  font-size: 200%;
+  font-size: 150%;
   background-color: rgba(0, 0, 0, 0.4);
   color: #ffffff;
   box-sizing: border-box;

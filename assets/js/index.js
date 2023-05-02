@@ -130,25 +130,29 @@ const keysRu = [
 class KeyBoardBody {
   constructor() {
     // console.log(this);
+    this.wrapperForImage = document.createElement('div');
+    this.wrapperForImage.classList.add('main-container');
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('container');
+    this.wrapperForImage.append(this.wrapper);
     this.title = document.createElement('h1');
     this.title.textContent = 'Virtual KeyBoard';
     this.title.classList.add('title');
     this.textarea = document.createElement('textarea');
     this.textarea.rows = '5';
     this.textarea.classList.add('textarea');
+    this.cursorPosition = 0;
     this.keyBoard = document.createElement('div');
     this.keyBoard.classList.add('keyBoard');
     this.PS = document.createElement('div');
     this.PS.classList.add('ps');
     this.PS.textContent = `Клавиатура создана на Windows OC,\n
-     переключение языка осуществляется сочетанием клавиш "Alt+Shift" или "Ctrl+Shift"`;
+     переключение языка осуществляется сочетанием клавиш "Alt+Shift" или "Ctrl+Shift" c учетом правильно выбранного языка на компьютере`;
     this.wrapper.append(this.title);
     this.wrapper.append(this.textarea);
     this.wrapper.append(this.keyBoard);
     this.wrapper.append(this.PS);
-    document.body.prepend(this.wrapper);
+    document.body.prepend(this.wrapperForImage);
     this.textarea.focus();
   }
 
@@ -199,6 +203,7 @@ class KeyBoardBody {
   showKey(event) {
     // console.log(event.key);
     // console.log(event.type);
+    this.textarea.focus();
     event.preventDefault();
     const buttonsCollection = document.querySelectorAll('.button');
     const currentButton = event.target.closest('.button');
@@ -231,7 +236,13 @@ class KeyBoardBody {
         && buttonsCollection[button].textContent !== 'Win'
         && buttonsCollection[button].textContent !== 'Alt'
       ) {
-        this.textarea.textContent += buttonsCollection[button].textContent;
+        // console.log(this.cursorPosition);
+        this.cursorPosition = this.textarea.selectionStart;
+        // console.log(this.cursorPosition);
+        this.textarea.textContent = `${this.textarea.textContent.slice(0, this.cursorPosition)}${buttonsCollection[button].textContent}${this.textarea.textContent.slice(this.cursorPosition)}`;
+        this.textarea.setSelectionRange(this.cursorPosition + 1, this.cursorPosition + 1);
+        this.cursorPosition = this.textarea.selectionStart;
+        // console.log(this.cursorPosition);
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');
@@ -257,7 +268,7 @@ class KeyBoardBody {
               (buttonsCollection[buttonForLanguage].textContent.match(
                 /[A-Za-z]/,
               )
-                || buttonsCollection[buttonForLanguage].textContent.match(/[А-Яа-я]/))
+                || buttonsCollection[buttonForLanguage].textContent.match(/[А-Яа-яЁё]/))
               && buttonsCollection[buttonForLanguage].textContent.length <= 1
             ) {
               // console.log(button.textContent.match(/[A-Za-z]/));
@@ -279,7 +290,7 @@ class KeyBoardBody {
                 /[A-Za-z]/,
               )
                 || buttonsCollection[buttonForLanguage].textContent.match(
-                  /[А-Яа-я]/,
+                  /[А-Яа-яЁё]/,
                 ))
               && buttonsCollection[buttonForLanguage].textContent.length <= 1
             ) {
@@ -494,6 +505,8 @@ class KeyBoardBody {
               === buttonsCollection[button].textContent))
         && buttonsCollection[button].textContent === 'Del'
       ) {
+        // const currentPositionOfCursor = this.textarea.selectionStart;
+        // console.log(currentPositionOfCursor);
         this.textarea.textContent = '';
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
@@ -580,9 +593,13 @@ const newKeyBoard = new KeyBoardBody();
 newKeyBoard.receiveKeyBoard();
 
 newKeyBoard.keyBoard.addEventListener('click', (event) => {
-  // newKeyBoard.textareaFocus();
   newKeyBoard.showKey(event);
 });
+
+// newKeyBoard.textarea.addEventListener('blur', () => {
+//   // console.log(event);
+//   newKeyBoard.textarea.textareaFocus();
+// });
 
 window.addEventListener('keydown', (event) => {
   // newKeyBoard.textareaFocus();

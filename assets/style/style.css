@@ -115,6 +115,7 @@ body {
 }
 
 .main-container {
+  height: 100%;
   background-image: url(../images/2023-03-14-windows-11-1-58245.jpeg);
   background-repeat: no-repeat;
   background-size: cover;

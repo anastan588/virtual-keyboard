@@ -141,7 +141,7 @@ class KeyBoardBody {
     this.textarea = document.createElement('textarea');
     this.textarea.rows = '5';
     this.textarea.classList.add('textarea');
-    this.cursorPosition = 0;
+    this.textarea.cursorPosition = 0;
     this.keyBoard = document.createElement('div');
     this.keyBoard.classList.add('keyBoard');
     this.PS = document.createElement('div');
@@ -216,11 +216,15 @@ class KeyBoardBody {
     for (let button = 0; button < buttonsCollection.length; button += 1) {
       // console.log(button);
       if (
-        ((event.key === buttonsCollection[button].textContent
-          || (event.key === 'ArrowUp' && buttonsCollection[button].textContent === '▲')
-          || (event.key === 'ArrowLeft' && buttonsCollection[button].textContent === '◄')
-          || (event.key === 'ArrowRight' && buttonsCollection[button].textContent === '►')
-          || (event.key === 'ArrowDown' && buttonsCollection[button].textContent === '▼'))
+        (event.key === buttonsCollection[button].textContent
+          || (event.key === 'ArrowUp'
+            && buttonsCollection[button].textContent === '▲')
+          || (event.key === 'ArrowLeft'
+            && buttonsCollection[button].textContent === '◄')
+          || (event.key === 'ArrowRight'
+            && buttonsCollection[button].textContent === '►')
+          || (event.key === 'ArrowDown'
+            && buttonsCollection[button].textContent === '▼')
           || (event.type === 'click'
             && currentButton.textContent
               === buttonsCollection[button].textContent))
@@ -236,13 +240,15 @@ class KeyBoardBody {
         && buttonsCollection[button].textContent !== 'Win'
         && buttonsCollection[button].textContent !== 'Alt'
       ) {
-        // console.log(this.cursorPosition);
-        this.cursorPosition = this.textarea.selectionStart;
-        // console.log(this.cursorPosition);
-        this.textarea.textContent = `${this.textarea.textContent.slice(0, this.cursorPosition)}${buttonsCollection[button].textContent}${this.textarea.textContent.slice(this.cursorPosition)}`;
-        this.textarea.setSelectionRange(this.cursorPosition + 1, this.cursorPosition + 1);
-        this.cursorPosition = this.textarea.selectionStart;
-        // console.log(this.cursorPosition);
+        this.textarea.cursorPosition = this.textarea.selectionStart;
+        this.textarea.textContent = `${this.textarea.textContent.slice(
+          0,
+          this.textarea.cursorPosition,
+        )}${
+          buttonsCollection[button].textContent
+        }${this.textarea.textContent.slice(this.textarea.cursorPosition)}`;
+        this.textarea.selectionStart = this.textarea.cursorPosition + 1;
+        this.textarea.selectionEnd = this.textarea.cursorPosition + 1;
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');
@@ -268,11 +274,15 @@ class KeyBoardBody {
               (buttonsCollection[buttonForLanguage].textContent.match(
                 /[A-Za-z]/,
               )
-                || buttonsCollection[buttonForLanguage].textContent.match(/[А-Яа-яЁё]/))
+                || buttonsCollection[buttonForLanguage].textContent.match(
+                  /[А-Яа-яЁё]/,
+                ))
               && buttonsCollection[buttonForLanguage].textContent.length <= 1
             ) {
               // console.log(button.textContent.match(/[A-Za-z]/));
-              let buttonText = buttonsCollection[buttonForLanguage].textContent.toUpperCase();
+              let buttonText = buttonsCollection[
+                buttonForLanguage
+              ].textContent.toUpperCase();
               buttonsCollection[buttonForLanguage].textContent = buttonText;
               buttonText = '';
             }
@@ -295,7 +305,9 @@ class KeyBoardBody {
               && buttonsCollection[buttonForLanguage].textContent.length <= 1
             ) {
               // console.log(button.textContent.match(/[A-Za-z]/));
-              let buttonText = buttonsCollection[buttonForLanguage].textContent.toLowerCase();
+              let buttonText = buttonsCollection[
+                buttonForLanguage
+              ].textContent.toLowerCase();
               buttonsCollection[buttonForLanguage].textContent = buttonText;
               buttonText = '';
             }
@@ -319,9 +331,14 @@ class KeyBoardBody {
 
           // button.classList.add("active");
           // let count = 0;
-          for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
+          for (
+            let secondButton = 0;
+            secondButton < buttonsCollection.length;
+            secondButton += 1
+          ) {
             if (
-              buttonsCollection[secondButton].textContent === buttonsCollection[button].textContent
+              buttonsCollection[secondButton].textContent
+              === buttonsCollection[button].textContent
             ) {
               // console.log(secondButton);
               // button.classList.add("active");
@@ -336,9 +353,14 @@ class KeyBoardBody {
           localStorage.getItem('Alt')
           && buttonsCollection[button].classList.contains('active')
         ) {
-          for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
+          for (
+            let secondButton = 0;
+            secondButton < buttonsCollection.length;
+            secondButton += 1
+          ) {
             if (
-              buttonsCollection[secondButton].textContent === buttonsCollection[button].textContent
+              buttonsCollection[secondButton].textContent
+              === buttonsCollection[button].textContent
             ) {
               // console.log(secondButton);
               // button.classList.add("active");
@@ -406,10 +428,15 @@ class KeyBoardBody {
             localStorage.removeItem('Shift');
             localStorage.removeItem('Alt');
             localStorage.removeItem('Ctrl');
-            for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
+            for (
+              let secondButton = 0;
+              secondButton < buttonsCollection.length;
+              secondButton += 1
+            ) {
               if (
-                (buttonsCollection[secondButton].textContent === 'Alt' || buttonsCollection[secondButton].textContent === 'Ctrl')
-                 || buttonsCollection[secondButton].textContent === 'Shift'
+                buttonsCollection[secondButton].textContent === 'Alt'
+                || buttonsCollection[secondButton].textContent === 'Ctrl'
+                || buttonsCollection[secondButton].textContent === 'Shift'
               ) {
                 // console.log(secondButton);
                 buttonsCollection[secondButton].classList.remove('active');
@@ -486,14 +513,23 @@ class KeyBoardBody {
               === buttonsCollection[button].textContent))
         && buttonsCollection[button].textContent === 'Backspace'
       ) {
-        const textArray = this.textarea.textContent.split('');
+        this.textarea.cursorPosition = this.textarea.selectionStart;
+        if (this.textarea.cursorPosition > 0) {
+          // console.log(this.textarea.cursorPosition);
+          this.textarea.textContent = `${this.textarea.textContent.slice(
+            0,
+            this.textarea.cursorPosition - 1,
+          )}${this.textarea.textContent.slice(this.textarea.cursorPosition)}`;
+          this.textarea.selectionStart = this.textarea.cursorPosition - 1;
+          this.textarea.selectionEnd = this.textarea.cursorPosition - 1;
+        }
+        // const textArray = this.textarea.textContent.split("");
         // console.log(textArray);
-        textArray.splice(textArray.length - 1, 1);
+        // textArray.splice(textArray.length - 1, 1);
         // console.log(textArray);
-        const text = textArray.join('');
-        // console.log(text);
-
-        this.textarea.textContent = text;
+        // const text = textArray.join("");
+        //  console.log(text);
+        // this.textarea.textContent = text;
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');
@@ -505,9 +541,28 @@ class KeyBoardBody {
               === buttonsCollection[button].textContent))
         && buttonsCollection[button].textContent === 'Del'
       ) {
-        // const currentPositionOfCursor = this.textarea.selectionStart;
-        // console.log(currentPositionOfCursor);
-        this.textarea.textContent = '';
+        if (
+          this.textarea.selectionStart === 0
+          && this.textarea.selectionEnd === this.textarea.textContent.length
+        ) {
+          this.textarea.textContent = '';
+        } else {
+          this.textarea.cursorPosition = this.textarea.selectionStart;
+          if (
+            this.textarea.cursorPosition !== this.textarea.textContent.length
+          ) {
+            this.textarea.textContent = `${this.textarea.textContent.slice(
+              0,
+              this.textarea.cursorPosition,
+            )}${this.textarea.textContent.slice(
+              this.textarea.cursorPosition + 1,
+            )}`;
+            this.textarea.selectionStart = this.textarea.cursorPosition;
+            this.textarea.selectionEnd = this.textarea.cursorPosition;
+          } else {
+            this.textarea.textContent = '';
+          }
+        }
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');
@@ -519,7 +574,14 @@ class KeyBoardBody {
               === buttonsCollection[button].textContent))
         && buttonsCollection[button].textContent === 'Enter'
       ) {
-        this.textarea.textContent += '\n';
+        this.textarea.cursorPosition = this.textarea.selectionStart;
+        this.textarea.textContent = `${this.textarea.textContent.slice(
+          0,
+          this.textarea.cursorPosition,
+        )}\n${this.textarea.textContent.slice(this.textarea.cursorPosition)}`;
+        this.textarea.selectionStart = this.textarea.cursorPosition + 1;
+        this.textarea.selectionEnd = this.textarea.cursorPosition + 1;
+        // this.textarea.textContent += "\n";
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');
@@ -531,7 +593,13 @@ class KeyBoardBody {
               === buttonsCollection[button].textContent))
         && buttonsCollection[button].textContent === 'Tab'
       ) {
-        this.textarea.textContent += '        ';
+        this.textarea.cursorPosition = this.textarea.selectionStart;
+        this.textarea.textContent = `${this.textarea.textContent.slice(
+          0,
+          this.textarea.cursorPosition,
+        )}    ${this.textarea.textContent.slice(this.textarea.cursorPosition)}`;
+        this.textarea.selectionStart = this.textarea.cursorPosition + 4;
+        this.textarea.selectionEnd = this.textarea.cursorPosition + 4;
         buttonsCollection[button].classList.add('active');
         setTimeout(() => {
           buttonsCollection[button].classList.remove('active');
@@ -541,18 +609,24 @@ class KeyBoardBody {
           || (event.type === 'click'
             && currentButton.textContent
               === buttonsCollection[button].textContent))
-        && buttonsCollection[button].textContent === 'Ctrl') {
+        && buttonsCollection[button].textContent === 'Ctrl'
+      ) {
         // console.log(localStorage.getItem('Ctrl'));
         if (
           !localStorage.getItem('Ctrl')
-            && !buttonsCollection[button].classList.contains('active')
+          && !buttonsCollection[button].classList.contains('active')
         ) {
           localStorage.setItem('Ctrl', 'true');
           // console.log(localStorage.getItem('Ctrl'));
-          for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
+          for (
+            let secondButton = 0;
+            secondButton < buttonsCollection.length;
+            secondButton += 1
+          ) {
             // console.log(buttonsCollection[secondButton].textContent);
             if (
-              buttonsCollection[secondButton].textContent === buttonsCollection[button].textContent
+              buttonsCollection[secondButton].textContent
+              === buttonsCollection[button].textContent
             ) {
               buttonsCollection[secondButton].classList.add('active');
             }
@@ -563,9 +637,14 @@ class KeyBoardBody {
           localStorage.getItem('Ctrl')
           && buttonsCollection[button].classList.contains('active')
         ) {
-          for (let secondButton = 0; secondButton < buttonsCollection.length; secondButton += 1) {
+          for (
+            let secondButton = 0;
+            secondButton < buttonsCollection.length;
+            secondButton += 1
+          ) {
             if (
-              buttonsCollection[secondButton].textContent === buttonsCollection[button].textContent
+              buttonsCollection[secondButton].textContent
+              === buttonsCollection[button].textContent
             ) {
               buttonsCollection[secondButton].classList.remove('active');
             }
@@ -575,7 +654,7 @@ class KeyBoardBody {
         }
       }
     }
-    this.textarea.selectionStart = this.textarea.value.length;
+    this.textarea.focus();
   }
 
   textareaFocus() {

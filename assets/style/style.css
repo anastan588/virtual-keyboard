@@ -36,7 +36,6 @@ aside {
 
 html,
 body {
-  height: 100%;
   width: 100%;
   font-size: 100%;
   line-height: 1;
@@ -111,19 +110,19 @@ body {
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  box-sizing: border-box;
 }
 
 .main-container {
   height: 100%;
   background-image: url(../images/2023-03-14-windows-11-1-58245.jpeg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  height: 100%;
   gap: 30px;
   font-family: "Georgia", sans-serif;
   max-width: 1200px;

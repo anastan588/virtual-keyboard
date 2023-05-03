@@ -1,0 +1,205 @@
+@font-face {
+  font-family: "Georgia";
+  src: url("../fonts/Gelasio-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+/*Normalize*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/*--------------------*/
+.bigred {
+  font-size: 20px;
+  color: red;
+}
+
+/*Normalize*/
+/*fonts*/
+/*fonts*/
+/*container*/
+/*container*/
+/*variables*/
+/*common css*/
+body {
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+}
+
+.main-container {
+  height: 100%;
+  background-image: url(../images/2023-03-14-windows-11-1-58245.jpeg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 30px;
+  font-family: "Georgia", sans-serif;
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+.title {
+  font-size: 300%;
+  width: 100%;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.textarea {
+  padding: 20px;
+  border: 2px solid #ffffff;
+  font-size: 200%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.keyBoard {
+  font-size: 200%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  justify-content: center;
+}
+
+.keyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  min-height: 68px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-size: 100%;
+  border: 4px inset rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.8);
+  vertical-align: middle;
+  flex-grow: 1;
+}
+.keyButton:hover {
+  border: 4px outset;
+  background-color: #008080;
+  border-color: tomato;
+  outline: none;
+}
+.keyButton:active {
+  border: 4px tomato outset;
+  color: tomato;
+  background-color: #008080;
+  border-radius: 50%;
+}
+
+.ps {
+  padding: 15px;
+  line-height: 150%;
+  width: 100%;
+  font-size: 150%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.active {
+  border: 4px tomato outset;
+  color: tomato;
+  background-color: #008080;
+  border-radius: 50%;
+}/*# sourceMappingURL=style.css.map */
